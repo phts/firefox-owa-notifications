@@ -1,0 +1,24 @@
+{
+  "manifest_version": 2,
+  "name": "Outlook Web Access notifications",
+  "version": "0.0.0",
+  "author": "Phil Tsaryk",
+
+  "description": "Add support for desktop notifications in Outlook Web Access application.",
+  "homepage_url": "https://github.com/phts/firefox-owa-notifications",
+  "icons": {
+    "48": "icons/app-48.png"
+  },
+
+  "applications": {
+    "gecko": {
+      "id": "owa-notifications@phts",
+      "strict_min_version": "52.0"
+    }
+  },
+
+  "content_scripts": [{
+    "matches": ["https://*/owa/*"],
+    "js": ["index.js"]
+  }]
+}
