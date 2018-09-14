@@ -31,7 +31,7 @@ const NOTIFICATIONS = {
 }
 
 function halt(error) {
-  console.error(error)
+  console.error('owa-notifications:', error)
   showNotification('error', {label: error})
   stop()
   throw new Error(error)
@@ -59,12 +59,12 @@ function createNotification(type, opts = {}) {
   const options = {
     icon,
   }
-  console.log('Notification', text, options)
+  console.info('owa-notifications:', 'Notification', text, options)
   return new Notification(text, options)
 }
 
 function start(context) {
-  console.log(`OWA version: ${context.rawOwaVersion}`)
+  console.info('owa-notifications:', `OWA version: ${context.rawOwaVersion}`)
 
   function isIgnored(numberEl) {
     if (!context.ignoredFolders) {
