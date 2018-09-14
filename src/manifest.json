@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Outlook Web Access notifications",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "author": "Phil Tsaryk",
 
   "description": "Add support for desktop notifications in Outlook Web Access application.",
