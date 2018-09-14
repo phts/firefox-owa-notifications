@@ -7,7 +7,7 @@
   "description": "Add support for desktop notifications in Outlook Web Access application.",
   "homepage_url": "https://github.com/phts/firefox-owa-notifications",
   "icons": {
-    "48": "icons/app-48.png"
+    "32": "icons/app-32.png"
   },
 
   "applications": {
