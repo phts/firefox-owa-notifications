@@ -5,6 +5,8 @@
     "build": "npm-run-all -s lint clean xpi",
     "clean": "rimraf dist",
     "lint": "eslint .",
+    "release": "node scripts/release.js",
+    "postrelease": "npm run build",
     "xpi": "node scripts/build.js"
   },
   "devDependencies": {
