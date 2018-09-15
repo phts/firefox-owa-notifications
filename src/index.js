@@ -1,8 +1,5 @@
 'use strict'
 
-const DELAY = 20000
-let stopScript
-
 const NOTIFICATIONS = {
   email: {
     label: 'New email',
@@ -31,6 +28,18 @@ const NOTIFICATIONS = {
     icon: 'https://i.imgur.com/ZMBLwBY.png',
   },
 }
+
+const DELAY = 20000
+
+let stopScript
+let silentMode = false
+
+browser.runtime.onMessage.addListener(data => {
+  console.info('owa-notifications:', `Silent mode: ${data.silentMode ? 'on' : 'off'}`)
+  silentMode = data.silentMode
+})
+
+browser.runtime.connect()
 
 function halt(error) {
   console.error('owa-notifications:', error)
@@ -118,6 +127,10 @@ function start(context) {
   }
 
   const interval = setInterval(function () {
+    if (silentMode) {
+      return
+    }
+
     const event = anyNewEvents()
     if (event) {
       showNotification(event)

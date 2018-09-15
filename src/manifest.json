@@ -10,6 +10,10 @@
     "32": "icons/app-32.png"
   },
 
+  "permissions": [
+    "tabs"
+  ],
+
   "applications": {
     "gecko": {
       "id": "owa-notifications@phts",
@@ -20,5 +24,15 @@
   "content_scripts": [{
     "matches": ["https://*/owa/*"],
     "js": ["index.js"]
-  }]
+  }],
+
+  "browser_action": {
+    "browser_style": true,
+    "default_icon": "icons/button-32.png",
+    "default_title": "OWA notifications: on/off"
+  },
+
+  "background": {
+    "scripts": ["background.js"]
+  }
 }
