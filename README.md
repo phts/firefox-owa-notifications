@@ -1,4 +1,4 @@
-# Outlook Web Access Notifications
+# Outlook Web Access notifications
 
 [![Mozilla Add-on](https://img.shields.io/amo/v/owa-notifications.svg)](https://addons.mozilla.org/firefox/addon/owa-notifications/)
 
