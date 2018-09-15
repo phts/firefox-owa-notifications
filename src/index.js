@@ -1,5 +1,7 @@
+'use strict'
+
 const DELAY = 20000
-let stop
+let stopScript
 
 const NOTIFICATIONS = {
   email: {
@@ -33,7 +35,7 @@ const NOTIFICATIONS = {
 function halt(error) {
   console.error('owa-notifications:', error)
   showNotification('error', {label: error})
-  stop()
+  stopScript()
   throw new Error(error)
 }
 
@@ -138,23 +140,23 @@ function getContext() {
   const owaVersion = `${versionParts[0]}.${versionParts[1].substr(0, 1)}`
 
   const EMAIL_COUNT_QUERY = {
-    '16.2': '[id$=".folder"] + div > span',
-    '15.1': '[id$=".folder"] + div > span',
+    16.2: '[id$=".folder"] + div > span',
+    15.1: '[id$=".folder"] + div > span',
   }
 
   const IGNORED_FOLDERS = {
-    '16.2': ['Drafts', 'Черновики'],
-    '15.1': ['Drafts', 'Черновики'],
+    16.2: ['Drafts', 'Черновики'],
+    15.1: ['Drafts', 'Черновики'],
   }
 
   const FOLDER_NAME_QUERY = {
-    '16.2': '[id$=".folder"]',
-    '15.1': '[id$=".folder"]',
+    16.2: '[id$=".folder"]',
+    15.1: '[id$=".folder"]',
   }
 
   const FAV_FOLDER_NAME_QUERY = {
-    '16.2': '[id$=".folder"]',
-    '15.1': '[id$=".folder"]',
+    16.2: '[id$=".folder"]',
+    15.1: '[id$=".folder"]',
   }
 
   return {
@@ -168,6 +170,6 @@ function getContext() {
   }
 }
 
-setTimeout(function() {
-  stop = start(getContext())
+setTimeout(() => {
+  stopScript = start(getContext())
 }, DELAY)
