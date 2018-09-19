@@ -158,8 +158,8 @@ function getContext() {
   }
 
   const IGNORED_FOLDERS = {
-    16.2: ['Drafts', 'Черновики'],
-    15.1: ['Drafts', 'Черновики'],
+    16.2: ['Drafts', 'Черновики', 'Junk Email', 'Нежелательная почта', 'Deleted Items', 'Удаленные'],
+    15.1: ['Drafts', 'Черновики', 'Junk Email', 'Нежелательная почта', 'Deleted Items', 'Удаленные'],
   }
 
   const FOLDER_NAME_QUERY = {
