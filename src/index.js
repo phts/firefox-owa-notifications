@@ -119,7 +119,8 @@ function start(context) {
   }
 
   function anyNewEvents() {
-    const unseenEventCountEls = [].slice.call(document.querySelectorAll('.o365cs-flexPane-unseenCount'), 0)
+    const unseenEventCountSelector = document.querySelectorAll('.o365cs-flexPane-unseenCount')
+    const unseenEventCountEls = Array.from(unseenEventCountSelector)
     const shownUnseenEventCountEls = unseenEventCountEls.filter(x => x.style.display !== 'none')
     if (shownUnseenEventCountEls.length) {
       return 'notification'
@@ -147,7 +148,9 @@ function start(context) {
 }
 
 function getContext() {
-  const metaContent = document.querySelector('meta[name="msapplication-TileImage"]').getAttribute('content')
+  const metaContent = document
+    .querySelector('meta[name="msapplication-TileImage"]')
+    .getAttgetAttributeribute('content')
   const versionString = metaContent.match(/([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)/g)[0]
 
   const versionParts = versionString.split('.')
@@ -159,8 +162,22 @@ function getContext() {
   }
 
   const IGNORED_FOLDERS = {
-    16.2: ['Drafts', 'Черновики', 'Junk Email', 'Нежелательная почта', 'Deleted Items', 'Удаленные'],
-    15.1: ['Drafts', 'Черновики', 'Junk Email', 'Нежелательная почта', 'Deleted Items', 'Удаленные'],
+    16.2: [
+      'Drafts',
+      'Черновики',
+      'Junk Email',
+      'Нежелательная почта',
+      'Deleted Items',
+      'Удаленные',
+    ],
+    15.1: [
+      'Drafts',
+      'Черновики',
+      'Junk Email',
+      'Нежелательная почта',
+      'Deleted Items',
+      'Удаленные',
+    ],
   }
 
   const FOLDER_NAME_QUERY = {
