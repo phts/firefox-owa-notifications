@@ -66,11 +66,12 @@ function showNotification(type, options = {}) {
 
 function createNotification(type, opts = {}) {
   const {label, icon} = NOTIFICATIONS[type]
-  const text = 'Outlook Web App: ' + (opts.label || label)
+  const notificationLabel = opts.label || label
+  const text = `Outlook Web App: ${notificationLabel}`
   const options = {
     icon,
   }
-  console.info('owa-notifications:', 'Notification', text, options)
+  console.info('owa-notifications:', notificationLabel, options)
   return new Notification(text, options)
 }
 
