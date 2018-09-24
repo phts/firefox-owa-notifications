@@ -150,7 +150,7 @@ function start(context) {
 function getContext() {
   const metaContent = document
     .querySelector('meta[name="msapplication-TileImage"]')
-    .getAttgetAttributeribute('content')
+    .getAttribute('content')
   const versionString = metaContent.match(/([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)/g)[0]
 
   const versionParts = versionString.split('.')
