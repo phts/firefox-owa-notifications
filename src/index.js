@@ -76,7 +76,7 @@ function createNotification(type, opts = {}) {
 }
 
 function start(context) {
-  console.info('owa-notifications:', `OWA version: ${context.rawOwaVersion}`)
+  console.info('owa-notifications:', `OWA version: ${context.owaVersion}`)
 
   function isIgnored(numberEl) {
     if (!context.ignoredFolders) {
@@ -96,12 +96,12 @@ function start(context) {
   function anyNewEmails() {
     const emailCountQuery = context.emailCountQuery
     if (!emailCountQuery) {
-      return throwUnsupportedVersionError(context.rawOwaVersion)
+      return throwUnsupportedVersionError(context.owaVersion)
     }
 
     const numberEls = document.querySelectorAll(emailCountQuery)
     if (!numberEls.length) {
-      return throwUnsupportedVersionError(context.rawOwaVersion)
+      return throwUnsupportedVersionError(context.owaVersion)
     }
 
     for (const numberEl of numberEls) {
@@ -151,53 +151,43 @@ function getContext() {
   const metaContent = document
     .querySelector('meta[name="msapplication-TileImage"]')
     .getAttribute('content')
-  const versionString = metaContent.match(/([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)/g)[0]
+  const owaVersion = metaContent.match(/([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)/g)[0]
 
-  const versionParts = versionString.split('.')
-  const owaVersion = `${versionParts[0]}.${versionParts[1].substr(0, 1)}`
-
-  const EMAIL_COUNT_QUERY = {
-    16.2: '[id$=".folder"] + div > span',
-    15.1: '[id$=".folder"] + div > span',
+  function getEmailCountQuery(v) {
+    if (v.startsWith('15.1') || v.startsWith('16.2')) {
+      return '[id$=".folder"] + div > span'
+    }
+    return null
   }
 
-  const IGNORED_FOLDERS = {
-    16.2: [
+  function getIgnoredFolders() {
+    return [
       'Drafts',
       'Черновики',
       'Junk Email',
       'Нежелательная почта',
       'Deleted Items',
       'Удаленные',
-    ],
-    15.1: [
-      'Drafts',
-      'Черновики',
-      'Junk Email',
-      'Нежелательная почта',
-      'Deleted Items',
-      'Удаленные',
-    ],
+    ]
   }
 
-  const FOLDER_NAME_QUERY = {
-    16.2: '[id$=".folder"]',
-    15.1: '[id$=".folder"]',
+  function getFolderNameQuery(v) {
+    if (v.startsWith('15.1') || v.startsWith('16.2')) {
+      return '[id$=".folder"]'
+    }
+    return null
   }
 
-  const FAV_FOLDER_NAME_QUERY = {
-    16.2: '[id$=".folder"]',
-    15.1: '[id$=".folder"]',
+  function getFavFolderNameQuery(v) {
+    return getFolderNameQuery(v)
   }
 
   return {
-    rawOwaVersion: versionString,
-    owaVersion: owaVersion,
-    [owaVersion]: true,
-    emailCountQuery: EMAIL_COUNT_QUERY[owaVersion],
-    ignoredFolders: IGNORED_FOLDERS[owaVersion],
-    folderNameQuery: FOLDER_NAME_QUERY[owaVersion],
-    favFolderNameQuery: FAV_FOLDER_NAME_QUERY[owaVersion],
+    owaVersion,
+    emailCountQuery: getEmailCountQuery(owaVersion),
+    ignoredFolders: getIgnoredFolders(owaVersion),
+    folderNameQuery: getFolderNameQuery(owaVersion),
+    favFolderNameQuery: getFavFolderNameQuery(owaVersion),
   }
 }
 
