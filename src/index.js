@@ -106,7 +106,8 @@ function start(context) {
 
     for (const numberEl of numberEls) {
       const textContent = numberEl.textContent.trim()
-      if (!textContent) {
+      const num = parseInt(textContent)
+      if (!num) {
         continue
       }
       if (isIgnored(numberEl)) {
@@ -147,15 +148,36 @@ function start(context) {
   }
 }
 
+function findOwaVersion() {
+  const links = Array.from(document.querySelectorAll('link'))
+  for (const link of links) {
+    const href = link.getAttribute('href')
+    if (!href) {
+      continue
+    }
+    const match = href.match(/([0-9]+\.[0-9.]+)/g)
+    if (!match) {
+      continue
+    }
+    const versionString = match[0]
+    if (!versionString) {
+      continue
+    }
+    return versionString
+  }
+  return null
+}
+
 function getContext() {
-  const metaContent = document
-    .querySelector('meta[name="msapplication-TileImage"]')
-    .getAttribute('content')
-  const owaVersion = metaContent.match(/([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)/g)[0]
+  const owaVersion = findOwaVersion()
 
   function getEmailCountQuery(v) {
     if (v.startsWith('15.1') || v.startsWith('16.2')) {
       return '[id$=".folder"] + div > span'
+    }
+    if (v.startsWith('2018')) {
+      return '#app > div > :not([role="banner"]) > div > div > div' +
+             '[role="treeitem"][aria-level="2"] > span:nth-of-type(2)'
     }
     return null
   }
@@ -174,6 +196,9 @@ function getContext() {
   function getFolderNameQuery(v) {
     if (v.startsWith('15.1') || v.startsWith('16.2')) {
       return '[id$=".folder"]'
+    }
+    if (v.startsWith('2018')) {
+      return '[role="treeitem"][aria-level="2"] > span:first-of-type'
     }
     return null
   }
