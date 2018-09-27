@@ -177,7 +177,7 @@ function getContext() {
       return '[id$=".folder"] + div > span'
     }
     if (isNewVersion) {
-      return '#app > div > :not([role="banner"]) > div > div > div' +
+      return '#app > div > :not([role="banner"]) > div > div > div ' +
              '[role="treeitem"][aria-level="2"] > span:nth-of-type(2)'
     }
     return null
