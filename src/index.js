@@ -177,8 +177,8 @@ function getContext() {
       return '[id$=".folder"] + div > span'
     }
     if (isNewVersion) {
-      return '#app > div > :not([role="banner"]) > div > div > div ' +
-             '[role="treeitem"][aria-level="2"] > span:nth-of-type(2)'
+      return '#app > div > :not([role="banner"]) > div > div > div \
+        [role="treeitem"] > span:nth-of-type(2)'
     }
     return null
   }
@@ -199,7 +199,7 @@ function getContext() {
       return '[id$=".folder"]'
     }
     if (isNewVersion) {
-      return '[role="treeitem"][aria-level="2"] > span:first-of-type'
+      return '[role="treeitem"] > span:first-of-type'
     }
     return null
   }
