@@ -137,8 +137,7 @@ function start(context) {
     const event = anyNewEvents()
     if (event) {
       showNotification(event)
-    }
-    if (event !== 'email' && anyNewEmails(context)) {
+    } else if (anyNewEmails()) {
       showNotification('email')
     }
   }, DELAY)
