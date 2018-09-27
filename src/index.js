@@ -120,11 +120,20 @@ function start(context) {
   }
 
   function anyNewEvents() {
-    const unseenEventCountSelector = document.querySelectorAll('.o365cs-flexPane-unseenCount')
-    const unseenEventCountEls = Array.from(unseenEventCountSelector)
-    const shownUnseenEventCountEls = unseenEventCountEls.filter(x => x.style.display !== 'none')
-    if (shownUnseenEventCountEls.length) {
-      return 'notification'
+    if (context.isOldVersion) {
+      const selector = '.o365cs-flexPane-unseenCount'
+      const unseenEventCountEls = Array.from(document.querySelectorAll(selector))
+      const shownUnseenEventCountEls = unseenEventCountEls.filter(x => x.style.display !== 'none')
+      if (shownUnseenEventCountEls.length) {
+        return 'notification'
+      }
+    }
+    if (context.isNewVersion) {
+      const selector = '.ms-Fabric.ms-Layer-content > div > div:nth-child(3)'
+      const notification = document.querySelector(selector)
+      if (notification) {
+        return 'notification'
+      }
     }
     return false
   }
@@ -210,6 +219,8 @@ function getContext() {
 
   return {
     owaVersion,
+    isNewVersion,
+    isOldVersion,
     emailCountQuery: getEmailCountQuery(),
     ignoredFolders: getIgnoredFolders(),
     folderNameQuery: getFolderNameQuery(),
