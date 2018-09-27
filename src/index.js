@@ -169,12 +169,14 @@ function findOwaVersion() {
 
 function getContext() {
   const owaVersion = findOwaVersion()
+  const isOldVersion = owaVersion.startsWith('15.1') || owaVersion.startsWith('16.2')
+  const isNewVersion = owaVersion.startsWith('2018')
 
-  function getEmailCountQuery(v) {
-    if (v.startsWith('15.1') || v.startsWith('16.2')) {
+  function getEmailCountQuery() {
+    if (isOldVersion) {
       return '[id$=".folder"] + div > span'
     }
-    if (v.startsWith('2018')) {
+    if (isNewVersion) {
       return '#app > div > :not([role="banner"]) > div > div > div' +
              '[role="treeitem"][aria-level="2"] > span:nth-of-type(2)'
     }
@@ -192,11 +194,11 @@ function getContext() {
     ]
   }
 
-  function getFolderNameQuery(v) {
-    if (v.startsWith('15.1') || v.startsWith('16.2')) {
+  function getFolderNameQuery() {
+    if (isOldVersion) {
       return '[id$=".folder"]'
     }
-    if (v.startsWith('2018')) {
+    if (isNewVersion) {
       return '[role="treeitem"][aria-level="2"] > span:first-of-type'
     }
     return null
@@ -208,10 +210,10 @@ function getContext() {
 
   return {
     owaVersion,
-    emailCountQuery: getEmailCountQuery(owaVersion),
-    ignoredFolders: getIgnoredFolders(owaVersion),
-    folderNameQuery: getFolderNameQuery(owaVersion),
-    favFolderNameQuery: getFavFolderNameQuery(owaVersion),
+    emailCountQuery: getEmailCountQuery(),
+    ignoredFolders: getIgnoredFolders(),
+    folderNameQuery: getFolderNameQuery(),
+    favFolderNameQuery: getFavFolderNameQuery(),
   }
 }
 
