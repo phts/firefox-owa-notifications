@@ -1,5 +1,7 @@
 'use strict'
 
+const supportedUrls = browser.runtime.getManifest()['content_scripts'][0]['matches']
+
 let silentMode = false
 
 function toggle() {
@@ -14,7 +16,7 @@ function onConnect() {
 
 function sync(obj) {
   browser.tabs.query({
-    url: 'https://*/owa/*',
+    url: supportedUrls,
   }).then(tabs => {
     tabs.forEach(tab => {
       browser.tabs.sendMessage(tab.id, obj)
@@ -30,5 +32,4 @@ function setIcon(icon) {
 }
 
 browser.browserAction.onClicked.addListener(toggle)
-
 browser.runtime.onConnect.addListener(onConnect)
