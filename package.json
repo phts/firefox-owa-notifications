@@ -6,16 +6,15 @@
     "clean": "rimraf dist",
     "lint": "eslint .",
     "prerelease": "npm run lint",
-    "release": "webext-release",
+    "release": "webext-version",
     "postrelease": "npm run build",
     "xpi": "webext-xpi"
   },
   "devDependencies": {
-    "@phts/eslint-config": "^1.1.0",
-    "eslint": "^5.6.0",
+    "@phts/eslint-config": "^1.8.1",
+    "eslint": "^6.8.0",
     "npm-run-all": "^4.1.5",
-    "rimraf": "^2.6.2",
-    "webextension-devtools": "^0.1.1"
-  },
-  "dependencies": {}
+    "rimraf": "^3.0.1",
+    "webextension-devtools": "^0.2.1"
+  }
 }
