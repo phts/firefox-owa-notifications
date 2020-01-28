@@ -179,7 +179,7 @@ function findOwaVersion() {
 function getContext() {
   const owaVersion = findOwaVersion()
   const isOldVersion = owaVersion.startsWith('15.1') || owaVersion.startsWith('16.2')
-  const isNewVersion = owaVersion.startsWith('2019')
+  const isNewVersion = owaVersion.startsWith('2019') || owaVersion.startsWith('2020')
 
   function getEmailCountQuery() {
     if (isOldVersion) {
