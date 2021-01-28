@@ -197,11 +197,14 @@ function getContext() {
   function getIgnoredFolders() {
     return [
       'Drafts',
-      'Черновики',
       'Junk Email',
-      'Нежелательная почта',
       'Deleted Items',
+      'Черновики',
+      'Нежелательная почта',
       'Удаленные',
+      'Entwürfe',
+      'Junk-E-Mail',
+      'Gelöschte Elemente',
     ]
   }
 
