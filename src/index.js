@@ -129,10 +129,12 @@ function start(context) {
       }
     }
     if (context.isNewVersion) {
-      const selector = '.ms-Fabric.ms-Layer-content > div > div:nth-child(3)'
-      const notification = document.querySelector(selector)
-      if (notification) {
-        return 'notification'
+      const selector = '.ms-Fabric.ms-Layer-content > div > div > div > div'
+      const els = Array.from(document.querySelectorAll(selector))
+      for (const el of els) {
+        if (context.remindersTitles.includes(el.textContent)) {
+          return 'notification'
+        }
       }
     }
     return false
@@ -177,6 +179,8 @@ function findOwaVersion() {
 }
 
 function getContext() {
+  const REMINDERS_TITLES = ['Reminders', 'Напоминания', 'Erinnerungen']
+
   const owaVersion = findOwaVersion()
   const isOldVersion = owaVersion.startsWith('15.1') || owaVersion.startsWith('16.2')
   const isNewVersion = owaVersion.startsWith('2019')
@@ -230,6 +234,7 @@ function getContext() {
     ignoredFolders: getIgnoredFolders(),
     folderNameQuery: getFolderNameQuery(),
     favFolderNameQuery: getFavFolderNameQuery(),
+    remindersTitles: REMINDERS_TITLES,
   }
 }
 
