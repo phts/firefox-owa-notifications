@@ -180,6 +180,17 @@ function findOwaVersion() {
 
 function getContext() {
   const REMINDERS_TITLES = ['Reminders', 'Напоминания', 'Erinnerungen']
+  const IGNORED_FOLDERS = [
+    'Drafts',
+    'Junk Email',
+    'Deleted Items',
+    'Черновики',
+    'Нежелательная почта',
+    'Удаленные',
+    'Entwürfe',
+    'Junk-E-Mail',
+    'Gelöschte Elemente',
+  ]
 
   const owaVersion = findOwaVersion()
   const isOldVersion = owaVersion.startsWith('15.1') || owaVersion.startsWith('16.2')
@@ -196,20 +207,6 @@ function getContext() {
         [role="treeitem"] > span:nth-of-type(2)'
     }
     return null
-  }
-
-  function getIgnoredFolders() {
-    return [
-      'Drafts',
-      'Junk Email',
-      'Deleted Items',
-      'Черновики',
-      'Нежелательная почта',
-      'Удаленные',
-      'Entwürfe',
-      'Junk-E-Mail',
-      'Gelöschte Elemente',
-    ]
   }
 
   function getFolderNameQuery() {
@@ -231,7 +228,7 @@ function getContext() {
     isNewVersion,
     isOldVersion,
     emailCountQuery: getEmailCountQuery(),
-    ignoredFolders: getIgnoredFolders(),
+    ignoredFolders: IGNORED_FOLDERS,
     folderNameQuery: getFolderNameQuery(),
     favFolderNameQuery: getFavFolderNameQuery(),
     remindersTitles: REMINDERS_TITLES,
