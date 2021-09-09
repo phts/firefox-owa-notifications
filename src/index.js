@@ -179,7 +179,12 @@ function findOwaVersion() {
 }
 
 function getContext() {
-  const REMINDERS_TITLES = ['Reminders', 'Напоминания', 'Erinnerungen']
+  const REMINDERS_TITLES = [
+    'Reminders',
+    'Напоминания',
+    'Erinnerungen',
+    'Připomenutí'
+  ]
   const IGNORED_FOLDERS = [
     'Drafts',
     'Junk Email',
@@ -190,6 +195,9 @@ function getContext() {
     'Entwürfe',
     'Junk-E-Mail',
     'Gelöschte Elemente',
+    'Koncepty',
+    'Nevyžádaná pošta',
+    'Odstraněná pošta'
   ]
 
   const owaVersion = findOwaVersion()
