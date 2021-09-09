@@ -183,7 +183,7 @@ function getContext() {
     'Reminders',
     'Напоминания',
     'Erinnerungen',
-    'Připomenutí'
+    'Připomenutí',
   ]
   const IGNORED_FOLDERS = [
     'Drafts',
@@ -197,7 +197,7 @@ function getContext() {
     'Gelöschte Elemente',
     'Koncepty',
     'Nevyžádaná pošta',
-    'Odstraněná pošta'
+    'Odstraněná pošta',
   ]
 
   const owaVersion = findOwaVersion()
