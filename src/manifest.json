@@ -25,7 +25,8 @@
     "matches": [
       "https://*/owa/*",
       "https://outlook.office.com/mail/*",
-      "https://outlook.office365.com/mail/*"
+      "https://outlook.office365.com/mail/*",
+      "https://outlook.office365.us/mail/*"
     ],
     "js": ["index.js"]
   }],
